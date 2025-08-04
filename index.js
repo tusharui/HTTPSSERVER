@@ -2,7 +2,6 @@ const express = require("express");
 const app = express();
 app.use(express.json());
 
-// Improved Middleware with better logs
 function middleware(req, res, next) {
     console.log("Method: " + req.method);
     console.log("Protocol: " + req.protocol);
@@ -12,7 +11,6 @@ function middleware(req, res, next) {
 }
 app.use(middleware);
 
-// Helper function to parse numbers safely
 function parseNumbers(req) {
     return [parseInt(req.query.a), parseInt(req.query.b)];
 }
@@ -38,6 +36,11 @@ app.get('/divide', (req, res) => {
 app.get('/subtract', (req, res) => {
     const [a, b] = parseNumbers(req);
     res.json({ ans: a - b });
+});
+
+app.get('/power', (req, res) => {
+    const [a, b] = parseNumbers(req);
+    res.json({ ans: Math.pow(a, b) });
 });
 
 app.listen(3000, () => {
